@@ -70,7 +70,7 @@ void TicTacToe::displayBoard(const int &grid_size_,
 }
 
 bool TicTacToe::validMove(int index) {
-    if (indexOccupied_.find(index) != indexOccupied_.end()) return false;
+    if (index_occupied_.find(index) != index_occupied_.end()) return false;
     return true;
 }
 
@@ -94,13 +94,13 @@ int TicTacToe::playerMove(const int &row, const int &col, const int &player) {
 int TicTacToe::computerMove() {
     int random_index = 1, total_range = grid_size_* grid_size_;
     thread_local unsigned int seed = time(NULL);
-    while (!validMove(random_index))
+    while (!validMove(random_index) && index_occupied_.size() <= total_range)
         random_index  = 1 + (rand_r(&seed) % total_range);
     return random_index;
 }
 
 bool TicTacToe::gameManager(int index, const int &player) {
-    indexOccupied_.insert(index);
+    index_occupied_.insert(index);
     // converting 1d index to 2d index values
     int move_x = 0, move_y = 0;
     move_x = (index-1) / grid_size_;
@@ -117,9 +117,48 @@ bool TicTacToe::gameManager(int index, const int &player) {
         std::cout << "\n   Player " << winner << " Won! " << std::endl;
         return true;
     }
-    if (indexOccupied_.size() == grid_size_ * grid_size_ && winner == 0) {
+    if (index_occupied_.size() == grid_size_ * grid_size_ && winner == 0) {
         std::cout << "  Game Draw!" << std::endl;
         return true;
     }
     return false;
 }
+
+void TicTacToe::instructions(){
+    std::vector<std::vector<char>> ins_grid = {{'1', '2', '3'},
+                                                {'4', '5', '6'},
+                                                {'7', '8', '9'}};
+    std::cout << "  Welcome to TIC-TAC-TOE game" << std::endl;
+    std::cout << "  This game can be played with 1 or 2 players!" << std::endl;
+    std::cout << "  The instructions are as follows: \n" << std::endl;
+    std::cout << "  The following shows the numbering on the grid" << std::endl;
+    displayBoard(ins_grid.size(),ins_grid);
+    std::cout << "  Use this numbers when asked for player input" << std::endl;
+    std::cout << "  Enjoy the Game!\n" << std::endl;
+}
+
+std::vector<std::vector<char>> TicTacToe::getGridDisp() { return grid_disp_; }
+
+std::vector<int> TicTacToe::getRows() { return rows_; }
+
+void TicTacToe::setRows(std::vector<int> &rows_vec) { rows_ = rows_vec; }
+
+std::vector<int> TicTacToe::getCols() { return cols_; }
+
+void TicTacToe::setCols(std::vector<int> &cols_vec) { cols_ = cols_vec; }
+
+std::set<int> TicTacToe::getIndexOccupied(){ return index_occupied_; }
+
+void TicTacToe::setIndexOccupied(std::set<int> &index_set) { index_occupied_  = index_set; }
+
+int TicTacToe::getGridSize() { return grid_size_; }
+
+void TicTacToe::setGridSize(int grid_size_value) { grid_size_ = grid_size_value; }
+
+int TicTacToe::getDiag() { return diag_; }
+
+void TicTacToe::setDiag(int diag_value) { diag_ = diag_value; }
+
+int TicTacToe::getXDiag() { return xdiag_; }
+
+void TicTacToe::setXDiag(int xdiag_value) { xdiag_ = xdiag_value; }

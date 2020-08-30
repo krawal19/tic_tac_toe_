@@ -114,12 +114,95 @@ class TicTacToe {
     * @return false : if the game is a draw and all moves are used by players
     */
     bool gameManager(int index, const int &player);
+    /**
+     * @brief instructions for the tic tac toe game
+     * 
+     */
+    void instructions();
+    /**
+     * @brief Get the Grid Disp object
+     * 
+     * @return std::vector<std::vector<char>> return the display vector
+     */
+    std::vector<std::vector<char>> getGridDisp();
+    /**
+     * @brief Get the Rows object
+     * 
+     * @return std::vector<int> rows_ vector
+     */
+    std::vector<int> getRows();
+    /**
+     * @brief Set the Rows object
+     * 
+     * @param rows_vec sets rows_ vector
+     */
+    void setRows(std::vector<int> &rows_vec);
+    /**
+     * @brief Get the Cols object
+     * 
+     * @return std::vector<int> cols_ vector
+     */
+    std::vector<int> getCols();
+    /**
+     * @brief Set the Cols object
+     * 
+     * @param cols_vec sets cols_ vector
+     */
+    void setCols(std::vector<int> &cols_vec);
+    /**
+     * @brief Get the Index Occupied object
+     * 
+     * @return std::set<int>  index_occupied_ set
+     */
+    std::set<int> getIndexOccupied();
+    /**
+     * @brief Set the Index Occupied object
+     * 
+     * @param index_set  sets inde_occupied_ set
+     */
+    void setIndexOccupied(std::set<int> &index_set);
+    /**
+     * @brief Get the Grid Size object
+     * 
+     * @return int grid_size_ value
+     */
+    int getGridSize();
+    /**
+     * @brief Set the Grid Size object
+     * 
+     * @param grid_size_value input grid size
+     */
+    void setGridSize(int grid_size_value);
+    /**
+     * @brief Get the Diag object
+     * 
+     * @return int disg_ value
+     */
+    int getDiag();
+    /**
+     * @brief Set the Diag object
+     * 
+     * @param diag_value  
+     */
+    void setDiag(int diag_value);
+    /**
+     * @brief Get the xDiag object
+     * 
+     * @return int xdiag_ value
+     */
+    int getXDiag();
+    /**
+     * @brief sets the xDiag object
+     * 
+     * @param xdiag_value 
+     */
+    void setXDiag(int xdiag_value);
 
  private:
     std::vector<std::vector<char>> grid_disp_;
     std::vector<int> rows_;
     std::vector<int> cols_;
-    std::set<int> indexOccupied_;
+    std::set<int> index_occupied_;
     int grid_size_;
     int diag_;
     int xdiag_;
