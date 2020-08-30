@@ -4,6 +4,8 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <stdlib.h>
+#include <time.h>
 
 /**
  * @brief class for Tic-Tac-Toe game
@@ -30,8 +32,9 @@ class TicTacToe {
 
    int playerMove(const int &row,const int &col,const int &player);
 
+   int computerMove();
+
    bool gameManager(int index, int &player);
-   
 
  private:
    std::set<int> indexOccupied_;

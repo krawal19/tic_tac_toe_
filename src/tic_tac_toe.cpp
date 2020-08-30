@@ -35,15 +35,26 @@ int TicTacToe::playerMove(const int &row,const int &col,const int &player) {
     
     rows_[row] += count;
     cols_[col] += count;
-    
+
     // Keeping diagonal count
     if (row == col) diag_+=count; 
     if (row + col == grid_size_-1) xdiag_+=count;
     
-    if (rows_[row] == grid_size_ || cols_[col] == grid_size_ || 
-        diag_ == grid_size_ || xdiag_ == grid_size_) 
-            return count > 0 ? 1 : 2;
+    //printf("rows %d, cols %d, diag %d, xdiag %d \n", rows_[row], cols_[col], diag_, xdiag_);
+
+    if (abs(rows_[row]) == grid_size_ || abs(cols_[col]) == grid_size_ || 
+        abs(diag_) == grid_size_ || abs(xdiag_) == grid_size_) return count > 0 ? 1 : 2;
     return 0;
+}
+
+int TicTacToe::computerMove() {
+    srand(time(NULL));
+    int random_index = 1;
+    int total_range = grid_size_* grid_size_; 
+    while(!validMove(random_index)) {
+        random_index  = 1 + (rand() % total_range);
+    }
+    return random_index; 
 }
 
 bool TicTacToe::gameManager(int index, int &player) {
@@ -56,7 +67,7 @@ bool TicTacToe::gameManager(int index, int &player) {
     std::cout << "  Player " << player << " entered '"<< grid_disp_[move_x][move_y] << "' at index " << index << std::endl;
     displayBoard(grid_size_, grid_disp_);
     int winner =  playerMove(move_x, move_y, player);
-
+    // printf("Winner value %d: ", winner);
     if (winner != 0) {
         std::cout << "\n   Player " << winner << " Won! " << std::endl;
         return true;
@@ -69,5 +80,12 @@ bool TicTacToe::gameManager(int index, int &player) {
 }
 
 // TODO
-// either intialze in the function or use as it is choose one 
+// Add computer, make him smart
+// comment the code 
+// run cpp lint and cpp check
+// Either initalize in the function or use as it is choose one 
 // Add grid size greater than zero condition
+// Write tests (if possible add bigger size grid testing)
+// write readme
+// optimize code (do memory profiling i.e consumption)
+// also cout or printf
