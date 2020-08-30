@@ -1,8 +1,50 @@
+/**
+ * BSD 3-Clause License
+ * Copyright (c) 2020, Kapil Rawal
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice, this
+ * list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright notice,
+ * this list of conditions and the following disclaimer in the documentation
+ * and/or other materials provided with the distribution.
+ * Neither the name of the copyright holder nor the names of its
+ * contributors may be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+ * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+ * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *  @copyright (c) BSD
+ *
+ *  @file   tic_tac_toe.h
+ *
+ *  @author   Kapil Rawal (kapilrawal1995@gmail.com)
+ *
+ *  @copyright   BSD License
+ *
+ *  @brief   TicTacToe class header file
+ *
+ *  @section   DESCRIPTION
+ *
+ *  File structure containing the definations of TicTacToe class
+ *
+ */
+
 #ifndef INCLUDE_TIC_TAC_TOE_H_
 #define INCLUDE_TIC_TAC_TOE_H_
 
 #include <stdlib.h>
 #include <time.h>
+#include <thread>
 #include <iostream>
 #include <vector>
 #include <set>
@@ -41,8 +83,8 @@ class TicTacToe {
     * @brief checks if the input move is valid
     * 
     * @param index input move from player or computer
-    * @return true if move is valid 
-    * @return false invalid if present in the set i.e already happened move
+    * @return true : if move is valid 
+    * @return false : invalid if present in the set i.e already happened move
     */
     bool validMove(int index);
     /**
@@ -51,13 +93,13 @@ class TicTacToe {
     * @param row input row number played by player or computer
     * @param col input col number played by player or computer
     * @param player player id used to keep count of moves
-    * @return int returns the player who won the game, 0 if draw
+    * @return int : returns the player who won the game, 0 if draw
     */
     int playerMove(const int &row, const int &col, const int &player);
     /**
     * @brief randomly calculates a valid move for the computer
     * 
-    * @return int valid move generated between range of input moves
+    * @return int : valid move generated between range of input moves
     */
     int computerMove();
     /**
@@ -68,8 +110,8 @@ class TicTacToe {
     * 
     * @param index input move index
     * @param player player id
-    * @return true if someone won the game and stop the loop in main
-    * @return false if the game is a draw and all moves are used by players
+    * @return true : if someone won the game and stop the loop in main
+    * @return false : if the game is a draw and all moves are used by players
     */
     bool gameManager(int index, const int &player);
 
