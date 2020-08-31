@@ -39,14 +39,7 @@ Run program: ./test/ticTacToeTest
 After running the ./ticTacToe program you will get the instructions on the screen as follows:
 
 >Note: Please try to input values within constriants. 
-- Size of the board should be entered to proceed with the game, valid size are 2, 3 and so on.
-```
-  Enter the size of the board (Ex: 3) and press 'ENTER':
-```
-- Here we entered size as 3 and press enter
-```
-  Enter the size of the board (Ex: 3) and press 'ENTER': 3
-```
+
 - Here the numbers in the grid represents the actual grid position which player should enter to play his move.
 
 ```
@@ -64,7 +57,7 @@ After running the ./ticTacToe program you will get the instructions on the scree
   Enjoy the Game!
 
 ```
-- After entering the grid size you'll have to enter total players playing this game, ideal inputs are 1 or 2
+- Now you'll have to enter total players playing this game, ideal inputs are 1 or 2
 ```
   
   Enter total players 1 or 2 :1
@@ -151,6 +144,10 @@ Not a vaild move, try different availabe value between 1-9!
 ```
 Board size invalid, Valid board size are 2,3...!
 ```
+## Extend Functionality and further enhancements
+- This game API can further be used for multiple size boards 5, 10 etc with changing the base API code.
+- The computer player can be made smarter
+- Input typo detection can be moved to API
 
 ## Author
 - Kapil Rawal

@@ -41,10 +41,10 @@
  */
 
 #include <iostream>
-#include "../include/tic_tac_toe.h"
+#include "tic_tac_toe.h"
 
 int main(int argc, char** argv) {
-    int grid_size = 1;
+    int grid_size = 3;
     int move_number = 1;
     int toggle = 1;
     int win_flag = false;
@@ -52,18 +52,10 @@ int main(int argc, char** argv) {
     bool computer_flag = false;
     int player;
 
-    // Input board size check
-    while (grid_size <= 1) {
-        std::cout << "  Enter the size of the board (Ex: 3) and press 'ENTER': ";
-        std::cin >> grid_size;
-        if (grid_size <= 1)
-            std::cout << "  Board size invalid, Valid board size are 3,4...!" << std::endl;
-    }
-
-    TicTacToe startGame(grid_size);
-    startGame.instructions();
-    
+    TicTacToe* startGame = new TicTacToe(grid_size);
+    startGame->instructions();
     const int total_moves = grid_size*grid_size;
+    
     // How many players playing the game
     std::cout << "  Enter total players 1 or 2 :";
     std:: cin >> total_players;
@@ -75,16 +67,16 @@ int main(int argc, char** argv) {
     // Now take input for Grid
     while (!win_flag) {
         if (computer_flag && toggle == 0) {
-            move_number = startGame.computerMove();
+            move_number = startGame->computerMove();
         } else {
             std::cout << "  Enter your move number and press 'ENTER': ";
             std::cin >> move_number;
         }
         // Sending moves to the game manager
         if (move_number<= total_moves && move_number > 0
-            && startGame.validMove(move_number)) {
+            && startGame->validMove(move_number)) {
             player = toggle == 1 ? 1 : 2;
-            win_flag = startGame.gameManager(move_number, player);
+            win_flag = startGame->gameManager(move_number, player);
             toggle ^= 1;
         } else {
             std::cout << "  Not a vaild move, try different availabe value between 1-" << total_moves << "!" << std::endl;

@@ -39,12 +39,12 @@
  *
  */
 
-#include "../include/tic_tac_toe.h"
+#include "tic_tac_toe.h"
 
 TicTacToe::TicTacToe(int grid_size) {
     grid_size_ = grid_size;
-    std::vector<std::vector<char>> grid_display(grid_size_,std::vector<char>(grid_size_, ' '));
-    grid_disp_ = grid_display;
+    std::vector<std::vector<char>> grid_disp_vector(grid_size_,std::vector<char>(grid_size_, ' '));
+    grid_disp_ = grid_disp_vector;
     rows_.resize(grid_size_);
     cols_.resize(grid_size_);
     diag_ = 0;
@@ -52,6 +52,19 @@ TicTacToe::TicTacToe(int grid_size) {
 }
 
 TicTacToe::~TicTacToe() {}
+
+void TicTacToe::instructions(){
+    std::vector<std::vector<char>> ins_grid = {{'1', '2', '3'},
+                                                {'4', '5', '6'},
+                                                {'7', '8', '9'}};
+    std::cout << "\n\tWelcome to TIC-TAC-TOE game" << std::endl;
+    std::cout << "  This game can be played with 1 or 2 players!" << std::endl;
+    std::cout << "  The instructions are as follows: \n" << std::endl;
+    std::cout << "  The following shows the numbering on the grid" << std::endl;
+    displayBoard(ins_grid);
+    std::cout << "  Use this numbers when asked for player input" << std::endl;
+    std::cout << "  Enjoy the Game!\n" << std::endl;
+}
 
 void TicTacToe::displayBoard(const std::vector<std::vector<char>> &grid_disp_) {
     for (int i = 0; i < grid_size_; ++i) {
@@ -116,32 +129,5 @@ bool TicTacToe::gameManager(int index, const int &player) {
     }
     return false;
 }
-
-void TicTacToe::instructions(){
-    std::vector<std::vector<char>> ins_grid = {{'1', '2', '3'},
-                                                {'4', '5', '6'},
-                                                {'7', '8', '9'}};
-    std::cout << "\n\tWelcome to TIC-TAC-TOE game" << std::endl;
-    std::cout << "  This game can be played with 1 or 2 players!" << std::endl;
-    std::cout << "  The instructions are as follows: \n" << std::endl;
-    std::cout << "  The following shows the numbering on the grid" << std::endl;
-    displayBoard(ins_grid);
-    std::cout << "  Use this numbers when asked for player input" << std::endl;
-    std::cout << "  Enjoy the Game!\n" << std::endl;
-}
-
-std::vector<std::vector<char>> TicTacToe::getGridDisp() { return grid_disp_; }
-
-std::vector<int> TicTacToe::getRows() { return rows_; }
-
-std::vector<int> TicTacToe::getCols() { return cols_; }
-
-std::set<int> TicTacToe::getIndexOccupied(){ return index_occupied_; }
-
-int TicTacToe::getGridSize() { return grid_size_; }
-
-int TicTacToe::getDiag() { return diag_; }
-
-int TicTacToe::getXDiag() { return xdiag_; }
 
 void TicTacToe::setIndexOccupied(std::set<int> &index_set) { index_occupied_  = index_set; }

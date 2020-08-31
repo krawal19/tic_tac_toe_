@@ -65,6 +65,11 @@ class TicTacToe {
     * 
     */
     ~TicTacToe();
+     /**
+     * @brief instructions for the tic tac toe game
+     * 
+     */
+    void instructions();
     /**
     * @brief Displays the current grid status
     * 
@@ -106,53 +111,6 @@ class TicTacToe {
     * @return false : if the game is a draw and all moves are used by players
     */
     bool gameManager(int index, const int &player);
-    /**
-     * @brief instructions for the tic tac toe game
-     * 
-     */
-    void instructions();
-    /**
-     * @brief Get the Grid Disp object
-     * 
-     * @return std::vector<std::vector<char>> return the display vector
-     */
-    std::vector<std::vector<char>> getGridDisp();
-    /**
-     * @brief Get the Rows object
-     * 
-     * @return std::vector<int> rows_ vector
-     */
-    std::vector<int> getRows();
-    /**
-     * @brief Get the Cols object
-     * 
-     * @return std::vector<int> cols_ vector
-     */
-    std::vector<int> getCols();
-    /**
-     * @brief Get the Index Occupied object
-     * 
-     * @return std::set<int>  index_occupied_ set
-     */
-    std::set<int> getIndexOccupied();
-    /**
-     * @brief Get the Grid Size object
-     * 
-     * @return int grid_size_ value
-     */
-    int getGridSize();
-    /**
-     * @brief Get the Diag object
-     * 
-     * @return int disg_ value
-     */
-    int getDiag();
-    /**
-     * @brief Get the xDiag object
-     * 
-     * @return int xdiag_ value
-     */
-    int getXDiag();
     /**
      * @brief Set the Index Occupied object
      * 

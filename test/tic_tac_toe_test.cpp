@@ -39,54 +39,39 @@
  *
  */
 
+#include <tuple>
 #include <gtest/gtest.h>
-#include "../include/tic_tac_toe.h"
+#include "tic_tac_toe.h"
 
 /**
- * @brief check if gameManager method works properly
- * 
- * @param TicTacToeTest name of the test suite
- * 
- * @param GameManagerTest name of the test
+ * @brief TestFixture class
  * 
  */
-TEST(TicTacToeTest, GameManagerTest) {
-    int grid_size = 3, index = 1, toggle = 1;
-    TicTacToe* game = new TicTacToe(grid_size);
-    std::vector<int> moves{1, 2, 4, 5, 8, 6, 3, 7, 9};
-    int player;
-
-    for (int i = 0; i < moves.size()-1; ++i) {
-        player = toggle == 1 ? 1 : 2;
-        EXPECT_EQ(false, game->gameManager(moves[i], player));
-        toggle ^=1;
-    }
-    EXPECT_EQ(true, game->gameManager(moves.size(), 1));
-}
+class TicTacToeTestFixture : public testing::Test {
+    protected:
+        TicTacToe *game;
+        int grid_size = 3;
+    void SetUp() { game = new TicTacToe(grid_size); }
+    void TearDown() { delete game;}
+};
 
 /**
- * @brief check if Initialization of variables if proper
- * 
- * @param TicTacToeTest name of the test suite
- * 
- * @param InitializationTest name of the test
+ * @brief Game Manager Parameterized Test class inherited from test Fixture class
  * 
  */
-TEST(TicTacToeTest, InitializationTest) {
-    int grid_size = 3, initial_diag = 0;
-    TicTacToe* game = new TicTacToe(grid_size);
+class TicTacToeTestParamGameManager: 
+public TicTacToeTestFixture, 
+public ::testing::WithParamInterface<std::tuple<int,int>> {
+};
 
-    EXPECT_EQ(grid_size, game->getGridSize());
-
-    EXPECT_EQ(grid_size, game->getGridDisp().size());
-    EXPECT_EQ(grid_size, game->getGridDisp()[0].size());
-
-    EXPECT_EQ(grid_size, game->getRows().size());
-    EXPECT_EQ(grid_size, game->getCols().size());
-
-    EXPECT_EQ(initial_diag, game->getDiag());
-    EXPECT_EQ(initial_diag, game->getXDiag());
-}
+/**
+ * @brief Player move Parameterized Test class inherited from test Fixture class
+ * 
+ */
+class TicTacToeTestParamPlayerMove:
+public TicTacToeTestFixture, 
+public ::testing::WithParamInterface<int> {
+};
 
 /**
  * @brief check if validMove method works properly
@@ -96,33 +81,14 @@ TEST(TicTacToeTest, InitializationTest) {
  * @param ValidMoveTest of the test
  * 
  */
-TEST(TicTacToeTest, ValidMoveTest) {
-    int index_invalid = 1, index_valid = 5, grid_size = 3;
-    TicTacToe* game = new TicTacToe(grid_size);
+TEST_F(TicTacToeTestFixture, ValidMoveTest) {
+    int index_invalid = 1, index_valid = 5;
     std::set<int> test_set;
     test_set.insert(index_invalid);
     game->setIndexOccupied(test_set);
 
     EXPECT_EQ(false, game->validMove(index_invalid));
     EXPECT_EQ(true, game->validMove(index_valid));
-}
-
-/**
- * @brief check if playerMove method works properly
- * 
- * @param TicTacToeTest name of the test suite
- * 
- * @param PlayerMoveTest of the test
- * 
- */
-TEST(TicTacToeTest, PlayerMoveTest) {
-    int grid_size = 3, row = 1, col = 1;
-    int diag = 0, xdiag = 0, win = 0;
-    TicTacToe* game = new TicTacToe(grid_size);
-
-    EXPECT_EQ(0, game->playerMove(row-1, col-1, 1));
-    EXPECT_EQ(0, game->playerMove(row, col, 1));
-    EXPECT_EQ(1, game->playerMove(row+1, col+1, 1));
 }
 
 /**
@@ -133,11 +99,104 @@ TEST(TicTacToeTest, PlayerMoveTest) {
  * @param ComputerMoveTest name of the test
  * 
  */
-TEST(TicTacToeTest, ComputerMoveTest) {
+TEST_F(TicTacToeTestFixture, ComputerMoveTest) {
     int grid_size = 3, index = 1;
-    TicTacToe* game = new TicTacToe(grid_size);
     std::set<int> test_set;
     test_set.insert(index);
     game->setIndexOccupied(test_set);
+
     EXPECT_NE(index, game->computerMove());
 }
+
+/**
+ * @brief check if playerMove method works properly for diagoal
+ * 
+ * @param TicTacToeTestFixture name of the test suite
+ * 
+ * @param PlayerMoveDigonalTest of the test
+ * 
+ */
+TEST_F(TicTacToeTestFixture, PlayerMoveDigonalTest) {
+    int row = 1, col = 1;
+
+    EXPECT_EQ(0, game->playerMove(row-1, col-1, 1));
+    EXPECT_EQ(0, game->playerMove(row, col, 1));
+    EXPECT_EQ(1, game->playerMove(row+1, col+1, 1));
+}
+    
+/**
+ * @brief check if playerMove method works properly for X diagonal
+ * 
+ * @param TicTacToeTestFixture name of the test suite
+ * 
+ * @param PlayerMoveXDigonalTest of the test
+ * 
+ */
+TEST_F(TicTacToeTestFixture, PlayerMoveXDigonalTest) {
+    int row = 1, col = 1;
+
+    EXPECT_EQ(0, game->playerMove(row-1 , col+1, 2));
+    EXPECT_EQ(0, game->playerMove(row, col, 2));
+    EXPECT_EQ(2, game->playerMove(row+1, col-1, 2));
+}
+
+/**
+ * @brief check if playerMove method works properly for Rows
+ * 
+ * @param TicTacToeTestParamPlayerMove name of the test suite
+ * 
+ * @param PlayerMoveRowTest of the test
+ * 
+ */
+TEST_P(TicTacToeTestParamPlayerMove, PlayerMoveRowTest) {
+    int col = 0;
+    int row = GetParam();
+    EXPECT_EQ(0, game->playerMove(row, col, 1));
+    EXPECT_EQ(0, game->playerMove(row, col+1, 1));
+    EXPECT_EQ(1, game->playerMove(row, col+2, 1));
+}
+
+/**
+ * @brief check if playerMove method works properly for Columns
+ * 
+ * @param TicTacToeTestParamPlayerMove name of the test suite
+ * 
+ * @param PlayerMoveColTest of the test
+ * 
+ */
+TEST_P(TicTacToeTestParamPlayerMove, PlayerMoveColTest) {
+    int row = 0;
+    int col = GetParam();
+
+    EXPECT_EQ(0, game->playerMove(row , col, 2));
+    EXPECT_EQ(0, game->playerMove(row + 1, col, 2));
+    EXPECT_EQ(2, game->playerMove(row + 2, col, 2));
+}
+
+INSTANTIATE_TEST_CASE_P(
+    TicTacToePlayerMoveParams,
+    TicTacToeTestParamPlayerMove,
+    ::testing::Values(0,1,2)
+    );
+
+/**
+ * @brief check if gameManager method works properly
+ * 
+ * @param TicTacToeTest name of the test suite
+ * 
+ * @param GameManagerTest name of the test
+ * 
+ */
+TEST_P(TicTacToeTestParamGameManager, GameManagerSigleInputTest) {
+    int player = std::get<0>(GetParam());
+    int moves = std::get<1>(GetParam());
+    ASSERT_FALSE(game->gameManager(moves, player));
+}
+
+INSTANTIATE_TEST_CASE_P(
+    TicTacToeGameManagerParams,
+    TicTacToeTestParamGameManager,
+    testing::Combine(
+        ::testing::Values(1,2),
+        ::testing::Range(1,10))
+    );
