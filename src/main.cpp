@@ -40,6 +40,7 @@
  *
  */
 
+#include <iostream>
 #include "../include/tic_tac_toe.h"
 
 int main(int argc, char** argv) {
@@ -51,19 +52,18 @@ int main(int argc, char** argv) {
     bool computer_flag = false;
     int player;
 
-    TicTacToe startGame;
-    startGame.instructions();
     // Input board size check
     while (grid_size <= 1) {
         std::cout << "  Enter the size of the board (Ex: 3) and press 'ENTER': ";
         std::cin >> grid_size;
         if (grid_size <= 1)
-            std::cout << "  Board size invalid, Valid board size are 2,3...!" << std::endl;
+            std::cout << "  Board size invalid, Valid board size are 3,4...!" << std::endl;
     }
 
+    TicTacToe startGame(grid_size);
+    startGame.instructions();
+    
     const int total_moves = grid_size*grid_size;
-    startGame.initializeGame(grid_size);
-
     // How many players playing the game
     std::cout << "  Enter total players 1 or 2 :";
     std:: cin >> total_players;

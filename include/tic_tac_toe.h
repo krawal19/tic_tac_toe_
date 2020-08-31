@@ -59,26 +59,18 @@ class TicTacToe {
     * @brief Construct a new Tic Tac Toe object
     * 
     */
-    TicTacToe();
+    TicTacToe(int grid_size);
     /**
     * @brief Destroy the Tic Tac Toe object
     * 
     */
     ~TicTacToe();
     /**
-    * @brief initalizing the class variables
-    * 
-    * @param grid_size_  size of the tic tac toe grid
-    */
-    void initializeGame(const int &grid_size_);
-    /**
     * @brief Displays the current grid status
     * 
-    * @param grid_size_ size of the tic tac toe grid
     * @param grid_disp_ grid getting displayed
     */
-    void displayBoard(const int &grid_size_,
-                      const std::vector<std::vector<char>> &grid_disp_);
+    void displayBoard(const std::vector<std::vector<char>> &grid_disp_);
     /**
     * @brief checks if the input move is valid
     * 
@@ -132,23 +124,11 @@ class TicTacToe {
      */
     std::vector<int> getRows();
     /**
-     * @brief Set the Rows object
-     * 
-     * @param rows_vec sets rows_ vector
-     */
-    void setRows(std::vector<int> &rows_vec);
-    /**
      * @brief Get the Cols object
      * 
      * @return std::vector<int> cols_ vector
      */
     std::vector<int> getCols();
-    /**
-     * @brief Set the Cols object
-     * 
-     * @param cols_vec sets cols_ vector
-     */
-    void setCols(std::vector<int> &cols_vec);
     /**
      * @brief Get the Index Occupied object
      * 
@@ -156,23 +136,11 @@ class TicTacToe {
      */
     std::set<int> getIndexOccupied();
     /**
-     * @brief Set the Index Occupied object
-     * 
-     * @param index_set  sets inde_occupied_ set
-     */
-    void setIndexOccupied(std::set<int> &index_set);
-    /**
      * @brief Get the Grid Size object
      * 
      * @return int grid_size_ value
      */
     int getGridSize();
-    /**
-     * @brief Set the Grid Size object
-     * 
-     * @param grid_size_value input grid size
-     */
-    void setGridSize(int grid_size_value);
     /**
      * @brief Get the Diag object
      * 
@@ -180,24 +148,18 @@ class TicTacToe {
      */
     int getDiag();
     /**
-     * @brief Set the Diag object
-     * 
-     * @param diag_value  
-     */
-    void setDiag(int diag_value);
-    /**
      * @brief Get the xDiag object
      * 
      * @return int xdiag_ value
      */
     int getXDiag();
     /**
-     * @brief sets the xDiag object
+     * @brief Set the Index Occupied object
      * 
-     * @param xdiag_value 
+     * @param index_set  sets inde_occupied_ set
      */
-    void setXDiag(int xdiag_value);
-
+    void setIndexOccupied(std::set<int> &index_set);
+    
  private:
     std::vector<std::vector<char>> grid_disp_;
     std::vector<int> rows_;

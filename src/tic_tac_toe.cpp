@@ -41,26 +41,19 @@
 
 #include "../include/tic_tac_toe.h"
 
-TicTacToe::TicTacToe()
-    : grid_size_(1),
-      diag_(0),
-      xdiag_(0) {
-}
-
-TicTacToe::~TicTacToe() {}
-
-void TicTacToe::initializeGame(const int &grid_size_) {
-    this->grid_size_ = grid_size_;
-    grid_disp_.resize(grid_size_);
-    for (int i = 0; i < grid_size_; ++i) grid_disp_[i].resize(grid_size_);
+TicTacToe::TicTacToe(int grid_size) {
+    grid_size_ = grid_size;
+    std::vector<std::vector<char>> grid_display(grid_size_,std::vector<char>(grid_size_, ' '));
+    grid_disp_ = grid_display;
     rows_.resize(grid_size_);
     cols_.resize(grid_size_);
     diag_ = 0;
     xdiag_ = 0;
 }
 
-void TicTacToe::displayBoard(const int &grid_size_,
-                             const std::vector<std::vector<char>> &grid_disp_) {
+TicTacToe::~TicTacToe() {}
+
+void TicTacToe::displayBoard(const std::vector<std::vector<char>> &grid_disp_) {
     for (int i = 0; i < grid_size_; ++i) {
         std::cout << " ";
         for (int j = 0; j < grid_size_; ++j) std::cout << " | " << grid_disp_[i][j];
@@ -110,7 +103,7 @@ bool TicTacToe::gameManager(int index, const int &player) {
     std::cout << "  Player " << player << " entered '"<<
         grid_disp_[move_x][move_y] << "' at index " << index << std::endl;
 
-    displayBoard(grid_size_, grid_disp_);
+    displayBoard(grid_disp_);
 
     int winner =  playerMove(move_x, move_y, player);
     if (winner != 0) {
@@ -132,7 +125,7 @@ void TicTacToe::instructions(){
     std::cout << "  This game can be played with 1 or 2 players!" << std::endl;
     std::cout << "  The instructions are as follows: \n" << std::endl;
     std::cout << "  The following shows the numbering on the grid" << std::endl;
-    displayBoard(ins_grid.size(),ins_grid);
+    displayBoard(ins_grid);
     std::cout << "  Use this numbers when asked for player input" << std::endl;
     std::cout << "  Enjoy the Game!\n" << std::endl;
 }
@@ -141,24 +134,14 @@ std::vector<std::vector<char>> TicTacToe::getGridDisp() { return grid_disp_; }
 
 std::vector<int> TicTacToe::getRows() { return rows_; }
 
-void TicTacToe::setRows(std::vector<int> &rows_vec) { rows_ = rows_vec; }
-
 std::vector<int> TicTacToe::getCols() { return cols_; }
-
-void TicTacToe::setCols(std::vector<int> &cols_vec) { cols_ = cols_vec; }
 
 std::set<int> TicTacToe::getIndexOccupied(){ return index_occupied_; }
 
-void TicTacToe::setIndexOccupied(std::set<int> &index_set) { index_occupied_  = index_set; }
-
 int TicTacToe::getGridSize() { return grid_size_; }
-
-void TicTacToe::setGridSize(int grid_size_value) { grid_size_ = grid_size_value; }
 
 int TicTacToe::getDiag() { return diag_; }
 
-void TicTacToe::setDiag(int diag_value) { diag_ = diag_value; }
-
 int TicTacToe::getXDiag() { return xdiag_; }
 
-void TicTacToe::setXDiag(int xdiag_value) { xdiag_ = xdiag_value; }
+void TicTacToe::setIndexOccupied(std::set<int> &index_set) { index_occupied_  = index_set; }
