@@ -39,6 +39,16 @@ Run program: ./test/ticTacToeTest
 After running the ./ticTacToe program you will get the instructions on the screen as follows:
 
 >Note: Please try to input values within constriants. 
+- Size of the board should be entered to proceed with the game, valid size are 2, 3 and so on.
+```
+  Enter the size of the board (Ex: 3) and press 'ENTER':
+```
+- Here we entered size as 3 and press enter
+```
+  Enter the size of the board (Ex: 3) and press 'ENTER': 3
+```
+- Here the numbers in the grid represents the actual grid position which player should enter to play his move.
+
 ```
   Welcome to TIC-TAC-TOE game
   This game can be played with 1 or 2 players!
@@ -53,14 +63,10 @@ After running the ./ticTacToe program you will get the instructions on the scree
   Use this numbers when asked for player input
   Enjoy the Game!
 
-  Enter the size of the board (Ex: 3) and press 'ENTER':
-
 ```
-- Here the numbers in the grid represents the actual grid position which player should enter to play his move.
-- Size of the board should be entered to proceed with the game, valid size are 2, 3 and so on.
 - After entering the grid size you'll have to enter total players playing this game, ideal inputs are 1 or 2
 ```
-  Enter the size of the board (Ex: 3) and press 'ENTER': 3
+  
   Enter total players 1 or 2 :1
   Player 2 is Computer!
 ```

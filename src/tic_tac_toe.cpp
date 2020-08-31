@@ -121,7 +121,7 @@ void TicTacToe::instructions(){
     std::vector<std::vector<char>> ins_grid = {{'1', '2', '3'},
                                                 {'4', '5', '6'},
                                                 {'7', '8', '9'}};
-    std::cout << "  Welcome to TIC-TAC-TOE game" << std::endl;
+    std::cout << "\n\tWelcome to TIC-TAC-TOE game" << std::endl;
     std::cout << "  This game can be played with 1 or 2 players!" << std::endl;
     std::cout << "  The instructions are as follows: \n" << std::endl;
     std::cout << "  The following shows the numbering on the grid" << std::endl;
